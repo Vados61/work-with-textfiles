@@ -1,13 +1,15 @@
-def creat_union_file():
+def creat_union_file(files):
 	union = []
-	with open('1.txt', encoding= 'utf-8') as file:
-		union.append(file.readlines())
-
-	with open('2.txt', encoding= 'utf-8') as file:
-		union.append(file.readlines())
-
-	with open('3.txt', encoding= 'utf-8') as file:
-		union.append(file.readlines())
+	for file_name in files:
+		with open(file_name, encoding= 'utf-8') as file:
+			text = file.readlines()
+			# text.append(file_name)
+			# # text.append(str(len(file.readlines())))
+			# text.append(file.readlines())
+			union.append([file_name + '\n', str(len(text)) + '\n'] + text)
+			# print(text)
+	print(union)
+	union.sort(key=len)
 
 	with open('union.txt', 'w', encoding= 'utf-8')	as file:
 		for texts in union:
@@ -15,4 +17,4 @@ def creat_union_file():
 				file.write(string)
 			file.write('\n')
 			
-creat_union_file()
+creat_union_file(['1.txt', '2.txt', '3.txt'])
